@@ -1,0 +1,1 @@
+This repo is to publish Data Structures and Algorithms practice problems.
