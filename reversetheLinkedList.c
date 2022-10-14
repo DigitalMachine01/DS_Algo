@@ -29,6 +29,7 @@ int main()
 void add_nodes(node** headPointer_ptr)
 {
     node* temp;
+    node* previous_temp;
 
     char response = 'y';
 
@@ -37,11 +38,26 @@ void add_nodes(node** headPointer_ptr)
         temp = malloc(sizeof(node));
 
         printf("Node Name: ");
-        scanf(" %c",&temp->name);
+        scanf(" %c",&temp->name); //leading space with %c to skip the white spaces
 
-        /* logic to put the node at the begninning of the linked list */
-        temp->next = *headPointer_ptr; 
-        *headPointer_ptr = temp;
+        // /* logic to put the node at the begninning of the linked list */
+        // temp->next = *headPointer_ptr; 
+        // *headPointer_ptr = temp;
+
+        /*  logic to put the node at the end */
+
+        if(*headPointer_ptr == 0)
+        {
+            temp->next = 0; 
+            *headPointer_ptr = temp;
+        }
+        else
+        {
+            previous_temp->next = temp;
+            temp->next = 0;
+        }
+
+        previous_temp = temp;
 
         printf("Want to add node? (y/n)");
         scanf(" %c",&response); //skip the white space left in bufffer with a leading space with %c
