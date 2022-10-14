@@ -14,15 +14,19 @@ typedef struct node_t
 
 void add_nodes(node**);
 
+void print(node*);
+
 int main()
 {
     node* head_ptr = 0;
     printf("Welcome to the linked list\n\nPlease add nodes..\n");
     add_nodes(&head_ptr);
+    printf("\nYour linked List is:\t");
     print(head_ptr); //print the linked list
+    printf("\n");
 }
 
-void add_begin(node** headPointer_ptr)
+void add_nodes(node** headPointer_ptr)
 {
     node* temp;
 
@@ -33,14 +37,14 @@ void add_begin(node** headPointer_ptr)
         temp = malloc(sizeof(node));
 
         printf("Node Name: ");
-        scanf("%s",temp->name);
+        scanf(" %c",&temp->name);
 
         /* logic to put the node at the begninning of the linked list */
         temp->next = *headPointer_ptr; 
         *headPointer_ptr = temp;
 
         printf("Want to add node? (y/n)");
-        scanf("%c",&response);
+        scanf(" %c",&response); //skip the white space left in bufffer with a leading space with %c
     }while(response == 'y' || response == 'Y');
 }
 
@@ -48,7 +52,7 @@ void print(node* h_ptr)
 {
     while(h_ptr)
     {
-        printf("%s\t",h_ptr->name);
+        printf("%c\t",h_ptr->name);
         h_ptr = h_ptr->next;
     }
 }
