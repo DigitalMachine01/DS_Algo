@@ -16,12 +16,18 @@ void add_nodes(node**);
 
 void print(node*);
 
+void reverse(node**);
+
 int main()
 {
     node* head_ptr = 0;
     printf("Welcome to the linked list\n\nPlease add nodes..\n");
     add_nodes(&head_ptr);
     printf("\nYour linked List is:\t");
+    print(head_ptr); //print the linked list
+    printf("\n");
+    reverse(&head_ptr);
+    printf("\nReverse linked List is:\t");
     print(head_ptr); //print the linked list
     printf("\n");
 }
@@ -71,4 +77,31 @@ void print(node* h_ptr)
         printf("%c\t",h_ptr->name);
         h_ptr = h_ptr->next;
     }
+}
+
+void reverse(node** headPointer_ptr)
+{
+    node *nextNode, *previousNode, *currentNode; //When declaring multiple pointers, put the astrik with the variable. otherwise put it with the type.
+
+    //Initial Case
+
+    previousNode = *headPointer_ptr;
+    nextNode = (*headPointer_ptr)->next;
+    (*headPointer_ptr)->next = 0;
+    *headPointer_ptr = nextNode;
+
+    //The repetitive Case
+
+    while((*headPointer_ptr)->next != 0)
+    {
+        currentNode = nextNode;
+        nextNode = (*headPointer_ptr)->next;
+        (*headPointer_ptr)->next = previousNode;
+        *headPointer_ptr = nextNode;
+        previousNode = currentNode;
+    }
+
+    //Last Case
+
+    (*headPointer_ptr)->next = previousNode;
 }
